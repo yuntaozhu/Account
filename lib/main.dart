@@ -46,14 +46,14 @@ class _MyAppState extends State<MyApp> {
     _router = createRouter(_appStateNotifier);
 
     Future.delayed(Duration(milliseconds: 1000),
-        () => setState(() => _appStateNotifier.stopShowingSplashImage()));
+        () => safeSetState(() => _appStateNotifier.stopShowingSplashImage()));
   }
 
   void setLocale(String language) {
-    setState(() => _locale = createLocale(language));
+    safeSetState(() => _locale = createLocale(language));
   }
 
-  void setThemeMode(ThemeMode mode) => setState(() {
+  void setThemeMode(ThemeMode mode) => safeSetState(() {
         _themeMode = mode;
         FlutterFlowTheme.saveThemeMode(mode);
       });

@@ -12,24 +12,24 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'buyer_user_release_model.dart';
-export 'buyer_user_release_model.dart';
+import 'distributor_order_model.dart';
+export 'distributor_order_model.dart';
 
-class BuyerUserReleaseWidget extends StatefulWidget {
-  const BuyerUserReleaseWidget({
+class DistributorOrderWidget extends StatefulWidget {
+  const DistributorOrderWidget({
     super.key,
-    int? buyerUserId,
-  }) : this.buyerUserId = buyerUserId ?? 111;
+    required this.distributorId,
+  });
 
-  final int buyerUserId;
+  final int? distributorId;
 
   @override
-  State<BuyerUserReleaseWidget> createState() => _BuyerUserReleaseWidgetState();
+  State<DistributorOrderWidget> createState() => _DistributorOrderWidgetState();
 }
 
-class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
+class _DistributorOrderWidgetState extends State<DistributorOrderWidget>
     with TickerProviderStateMixin {
-  late BuyerUserReleaseModel _model;
+  late DistributorOrderModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -38,7 +38,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => BuyerUserReleaseModel());
+    _model = createModel(context, () => DistributorOrderModel());
 
     animationsMap.addAll({
       'rowOnPageLoadAnimation': AnimationInfo(
@@ -114,7 +114,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
   @override
   Widget build(BuildContext context) {
     return Title(
-        title: 'buyer_user_release',
+        title: 'distributor_order',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: Scaffold(
           key: scaffoldKey,
@@ -124,8 +124,8 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
             child: FutureBuilder<ApiCallResponse>(
               future:
                   (_model.apiRequestCompleter ??= Completer<ApiCallResponse>()
-                        ..complete(BuyeruserGroup.releaseCall.call(
-                          buyerUserId: widget!.buyerUserId,
+                        ..complete(DistributorGroup.distributorOrderCall.call(
+                          distributorId: widget!.distributorId,
                           order: 'DESC',
                           page: 1,
                           limit: 10,
@@ -146,7 +146,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                     ),
                   );
                 }
-                final columnReleaseResponse = snapshot.data!;
+                final columnDistributorOrderResponse = snapshot.data!;
 
                 return RefreshIndicator(
                   onRefresh: () async {
@@ -164,7 +164,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                               16.0, 0.0, 16.0, 0.0),
                           child: FutureBuilder<ApiCallResponse>(
                             future: UserInfoGroup.idCall.call(
-                              buyerUserId: widget!.buyerUserId,
+                              buyerUserId: widget!.distributorId,
                             ),
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.
@@ -238,7 +238,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                             Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                '76deh3ax' /* Welcome, */,
+                                                'v70odvyw' /* Welcome, */,
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -278,7 +278,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                                   0.0, 4.0, 0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
-                                              'xy7ays0z' /* 您的赟市账户信息 */,
+                                              'e9a4fyfh' /* 您的赟市账户信息 */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodySmall
@@ -338,7 +338,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            'pt15h3du' /* 兑换券 */,
+                                            '00xl8y6s' /* 积分 */,
                                           ),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
@@ -352,17 +352,19 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                         ),
                                         Text(
                                           valueOrDefault<String>(
-                                            (columnReleaseResponse.jsonBody
+                                            (columnDistributorOrderResponse
+                                                        .jsonBody
                                                         .toList()
-                                                        .map<BuyerUserReleaseStruct?>(
-                                                            BuyerUserReleaseStruct
+                                                        .map<DistributorOrderStruct?>(
+                                                            DistributorOrderStruct
                                                                 .maybeFromMap)
                                                         .toList()
                                                     as Iterable<
-                                                        BuyerUserReleaseStruct?>)
+                                                        DistributorOrderStruct?>)
                                                 .withoutNulls
                                                 ?.first
-                                                ?.totalIncome,
+                                                ?.orderId
+                                                ?.toString(),
                                             '0',
                                           ),
                                           textAlign: TextAlign.center,
@@ -387,7 +389,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                         children: [
                                           Text(
                                             FFLocalizations.of(context).getText(
-                                              'ewsjgjau' /* 累计收入 */,
+                                              '43qaq761' /* 累计收入 */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .displaySmall
@@ -407,7 +409,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                '0ngnpfzu' /* 累计支出 */,
+                                                'pg6b30v8' /* 累计支出 */,
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -436,17 +438,19 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                         children: [
                                           Text(
                                             valueOrDefault<String>(
-                                              (columnReleaseResponse.jsonBody
+                                              (columnDistributorOrderResponse
+                                                          .jsonBody
                                                           .toList()
-                                                          .map<BuyerUserReleaseStruct?>(
-                                                              BuyerUserReleaseStruct
+                                                          .map<DistributorOrderStruct?>(
+                                                              DistributorOrderStruct
                                                                   .maybeFromMap)
                                                           .toList()
                                                       as Iterable<
-                                                          BuyerUserReleaseStruct?>)
+                                                          DistributorOrderStruct?>)
                                                   .withoutNulls
                                                   ?.first
-                                                  ?.totalIncome,
+                                                  ?.orderId
+                                                  ?.toString(),
                                               '0',
                                             ),
                                             style: FlutterFlowTheme.of(context)
@@ -462,17 +466,19 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                           ),
                                           Text(
                                             valueOrDefault<String>(
-                                              (columnReleaseResponse.jsonBody
+                                              (columnDistributorOrderResponse
+                                                          .jsonBody
                                                           .toList()
-                                                          .map<BuyerUserReleaseStruct?>(
-                                                              BuyerUserReleaseStruct
+                                                          .map<DistributorOrderStruct?>(
+                                                              DistributorOrderStruct
                                                                   .maybeFromMap)
                                                           .toList()
                                                       as Iterable<
-                                                          BuyerUserReleaseStruct?>)
+                                                          DistributorOrderStruct?>)
                                                   .withoutNulls
                                                   ?.first
-                                                  ?.totalExpenses,
+                                                  ?.orderId
+                                                  ?.toString(),
                                               '0',
                                             ),
                                             style: FlutterFlowTheme.of(context)
@@ -556,7 +562,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                               child: Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  'idq66qaf' /* 全部 */,
+                                                  'sgdkz0id' /* 全部 */,
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -598,7 +604,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                               child: Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  '62rhktwj' /* 收入 */,
+                                                  'rerygba0' /* 收入 */,
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -640,7 +646,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                               child: Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  'cwmfaot7' /* 支出 */,
+                                                  'd2fmbhn8' /* 支出 */,
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -666,7 +672,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                     children: [
                                       Text(
                                         FFLocalizations.of(context).getText(
-                                          'w3ew66t6' /* Transaction */,
+                                          'itgmijyu' /* Transaction */,
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodySmall
@@ -680,14 +686,15 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                 ),
                                 Builder(
                                   builder: (context) {
-                                    final item = (columnReleaseResponse.jsonBody
+                                    final item = (columnDistributorOrderResponse
+                                                    .jsonBody
                                                     .toList()
-                                                    .map<BuyerUserReleaseStruct?>(
-                                                        BuyerUserReleaseStruct
+                                                    .map<DistributorOrderStruct?>(
+                                                        DistributorOrderStruct
                                                             .maybeFromMap)
                                                     .toList()
                                                 as Iterable<
-                                                    BuyerUserReleaseStruct?>)
+                                                    DistributorOrderStruct?>)
                                             .withoutNulls
                                             ?.toList() ??
                                         [];
@@ -765,7 +772,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            'hvtbeb4p' /* 兑换券 */,
+                                                            '5w4hw3mx' /* 订单编号 */,
                                                           ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
@@ -786,7 +793,8 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                                                       0.0,
                                                                       0.0),
                                                           child: Text(
-                                                            itemItem.balance,
+                                                            itemItem
+                                                                .orderFormid,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium
@@ -816,7 +824,7 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                                         CrossAxisAlignment.end,
                                                     children: [
                                                       Text(
-                                                        itemItem.releaseAmount,
+                                                        itemItem.commission,
                                                         textAlign:
                                                             TextAlign.end,
                                                         style:
@@ -842,7 +850,8 @@ class _BuyerUserReleaseWidgetState extends State<BuyerUserReleaseWidget>
                                                                     0.0,
                                                                     0.0),
                                                         child: Text(
-                                                          itemItem.createTime,
+                                                          itemItem
+                                                              .transactionTime,
                                                           textAlign:
                                                               TextAlign.end,
                                                           style: FlutterFlowTheme

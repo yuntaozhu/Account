@@ -100,7 +100,7 @@ class _BuyerUserOrderWidgetState extends State<BuyerUserOrderWidget>
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -230,7 +230,7 @@ class _BuyerUserOrderWidgetState extends State<BuyerUserOrderWidget>
                                             style: FlutterFlowTheme.of(context)
                                                 .headlineSmall
                                                 .override(
-                                                  fontFamily: 'Inter',
+                                                  fontFamily: 'Outfit',
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
@@ -249,7 +249,7 @@ class _BuyerUserOrderWidgetState extends State<BuyerUserOrderWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .headlineSmall
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Outfit',
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -374,7 +374,7 @@ class _BuyerUserOrderWidgetState extends State<BuyerUserOrderWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .displaySmall
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily: 'Outfit',
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .alternate,
@@ -393,7 +393,7 @@ class _BuyerUserOrderWidgetState extends State<BuyerUserOrderWidget>
                                             style: FlutterFlowTheme.of(context)
                                                 .displaySmall
                                                 .override(
-                                                  fontFamily: 'Inter',
+                                                  fontFamily: 'Outfit',
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .alternate,
@@ -739,7 +739,7 @@ class _BuyerUserOrderWidgetState extends State<BuyerUserOrderWidget>
                                                                 .headlineSmall
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Inter',
+                                                                      'Outfit',
                                                                   letterSpacing:
                                                                       0.0,
                                                                 ),

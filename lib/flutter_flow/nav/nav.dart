@@ -84,6 +84,40 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.int,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'pay_page',
+          path: '/payPage',
+          builder: (context, params) => PayPageWidget(
+            shopId: params.getParam(
+              'shopId',
+              ParamType.int,
+            ),
+            buyerUserId: params.getParam(
+              'buyerUserId',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'distributor_order',
+          path: '/distributorOrder',
+          builder: (context, params) => DistributorOrderWidget(
+            distributorId: params.getParam(
+              'distributorId',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'distributorRelease',
+          path: '/distributorRelease',
+          builder: (context, params) => DistributorReleaseWidget(
+            distributorId: params.getParam(
+              'distributorId',
+              ParamType.int,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

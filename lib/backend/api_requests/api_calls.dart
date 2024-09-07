@@ -264,8 +264,8 @@ class DistributorOrderCall {
       },
       returnBody: true,
       encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
+      decodeUtf8: true,
+      cache: true,
       isStreamingApi: false,
       alwaysAllowBody: false,
     );
@@ -314,7 +314,7 @@ class UserInfoGroup {
   static String getBaseUrl({
     int? buyerUserId,
   }) =>
-      'http://39.106.230.250:6688/api/user/';
+      'http://39.106.230.250:6688/api/user';
   static Map<String, String> headers = {};
   static IdCall idCall = IdCall();
 }
@@ -335,8 +335,8 @@ class IdCall {
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
+      decodeUtf8: true,
+      cache: true,
       isStreamingApi: false,
       alwaysAllowBody: false,
     );
